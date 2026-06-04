@@ -1,0 +1,35 @@
+name: Machine Learning Model CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  ml_training:
+    runs-on: ubuntu-latest
+
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Setup Miniconda
+      uses: conda-incubator/setup-miniconda@v3
+      with:
+        auto-update-conda: true
+        python-version: '3.12.7'
+
+    - name: Install MLflow and DagsHub
+      shell: bash -l {0}
+      run: |
+        pip install mlflow==2.19.0 dagshub==0.3.38
+
+    - name: Run MLflow Project Experiment
+      shell: bash -l {0}
+      env:
+        DAGSHUB_USERNAME: "upan55678"
+      run: |
+        mlflow run MLProject --entry-point main
