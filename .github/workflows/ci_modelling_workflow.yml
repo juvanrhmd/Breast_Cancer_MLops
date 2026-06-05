@@ -9,9 +9,6 @@ jobs:
   ml_training:
     runs-on: ubuntu-latest
 
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-      DAGSHUB_CLIENT_TOKEN: "b017fd076ce0c4ad3f0016d7dabc42cedb83c2bd"
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v4
@@ -24,8 +21,14 @@ jobs:
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install mlflow==2.19.0 dagshub==0.3.38 scikit-learn==1.5.2 pandas==2.2.3 numpy==1.26.4 matplotlib==3.9.2 seaborn==0.13.2
+        pip install mlflow==2.19.0 scikit-learn==1.5.2 pandas==2.2.3 numpy==1.26.4 matplotlib==3.9.2 seaborn==0.13.2
 
     - name: Run MLflow Project Experiment
+      env:
+        FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+        MLFLOW_TRACKING_USERNAME: "upan55678"
+        MLFLOW_TRACKING_PASSWORD: "b017fd076ce0c4ad3f0016d7dabc42cedb83c2bd"
       run: |
-        mlflow run MLProject --entry-point main --env-manager local
+        # Masuk ke folder MLProject lalu eksekusi script tuning secara langsung
+        cd MLProject
+        python modelling_tuning.py
