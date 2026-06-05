@@ -11,7 +11,7 @@ jobs:
 
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
+      DAGSHUB_CLIENT_TOKEN: "b017fd076ce0c4ad3f0016d7dabc42cedb83c2bd"
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v4
@@ -27,9 +27,5 @@ jobs:
         pip install mlflow==2.19.0 dagshub==0.3.38 scikit-learn==1.5.2 pandas==2.2.3 numpy==1.26.4 matplotlib==3.9.2 seaborn==0.13.2
 
     - name: Run MLflow Project Experiment
-      env:
-        DAGSHUB_USERNAME: "upan55678"
-
-        DAGSHUB_TOKEN: "b017fd076ce0c4ad3f0016d7dabc42cedb83c2bd"
       run: |
         mlflow run MLProject --entry-point main --env-manager local
