@@ -25,7 +25,8 @@ def train_baseline():
     # 3. Setup Eksperimen MLflow
     mlflow.set_experiment("Breast_Cancer_Baseline")
     
-    with mlflow.start_run(run_name="RandomForest_Baseline"):
+    #with mlflow.start_run(run_name="RandomForest_Baseline"):
+    with mlflow.start_run(run_name="RandomForest_Baseline", nested=True):
         # Parameter Model
         n_estimators = 50
         max_depth = 5
