@@ -10,8 +10,8 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score, confusion_matrix
 
 # Inisialisasi DagsHub
-dagshub.init(repo_owner='upan55678', repo_name='Breast_Cancer_MLops', mlflow=True)
-
+#dagshub.init(repo_owner='upan55678', repo_name='Breast_Cancer_MLops', mlflow=True)
+mlflow.set_tracking_uri("https://dagshub.com/upan55678/Breast_Cancer_MLops.mlflow")
 def train_with_tuning():
     dataset_path = "breast_cancer_clean.csv"
         
