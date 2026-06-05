@@ -30,4 +30,4 @@ jobs:
       env:
         DAGSHUB_USERNAME: "upan55678"
       run: |
-        mlflow run MLProject --entry-point main --env-manager localain
+        mlflow run MLProject --entry-point main --env-manager local
