@@ -16,20 +16,18 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v4
 
-    - name: Setup Miniconda
-      uses: conda-incubator/setup-miniconda@v3
+    - name: Set up Python 3.12.7
+      uses: actions/setup-python@v5
       with:
-        auto-update-conda: true
         python-version: '3.12.7'
 
-    - name: Install MLflow and DagsHub
-      shell: bash -l {0}
+    - name: Install Dependencies
       run: |
-        pip install mlflow==2.19.0 dagshub==0.3.38
+        python -m pip install --upgrade pip
+        pip install mlflow==2.19.0 dagshub==0.3.38 scikit-learn==1.5.2 pandas==2.2.3 numpy==1.26.4 matplotlib==3.9.2 seaborn==0.13.2
 
     - name: Run MLflow Project Experiment
-      shell: bash -l {0}
       env:
         DAGSHUB_USERNAME: "upan55678"
       run: |
-        mlflow run MLProject --entry-point main
+        mlflow run MLProject --entry-point main --env-manager localain
