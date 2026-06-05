@@ -9,9 +9,6 @@ jobs:
   ml_training:
     runs-on: ubuntu-latest
 
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v4
@@ -24,11 +21,13 @@ jobs:
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install mlflow==2.19.0 dagshub==0.3.38 scikit-learn==1.5.2 pandas==2.2.3 numpy==1.26.4 matplotlib==3.9.2 seaborn==0.13.2
+        pip install mlflow==2.19.0 scikit-learn==1.5.2 pandas==2.2.3 numpy==1.26.4 matplotlib==3.9.2 seaborn==0.13.2
 
     - name: Run MLflow Project Experiment
       env:
-        DAGSHUB_USERNAME: "upan55678"
+        FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+        # Menggunakan kredensial bawaan HTTP Basic Auth milik MLflow
+        MLFLOW_TRACKING_USERNAME: "upan55678"
+        MLFLOW_TRACKING_PASSWORD: "masukkan_token_panjang_dagshub_anda_di_sini"
       run: |
-        # Menggunakan --env-manager local agar MLflow langsung mengeksekusi kode menggunakan library yang sudah di-install di atas
         mlflow run MLProject --entry-point main --env-manager local
