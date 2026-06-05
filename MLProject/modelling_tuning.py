@@ -23,7 +23,8 @@ def train_with_tuning():
     
     mlflow.set_experiment("Breast_Cancer_Tuning")
     
-    with mlflow.start_run(run_name="RandomForest_GridSearch"):
+    #with mlflow.start_run(run_name="RandomForest_GridSearch"):
+    with mlflow.start_run(run_name="RandomForest_GridSearch", nested=True):
         # 1. Hyperparameter Tuning Setup
         rf = RandomForestClassifier(random_state=42)
         param_grid = {
