@@ -29,5 +29,7 @@ jobs:
     - name: Run MLflow Project Experiment
       env:
         DAGSHUB_USERNAME: "upan55678"
+
+        DAGSHUB_TOKEN: "b017fd076ce0c4ad3f0016d7dabc42cedb83c2bd"
       run: |
         mlflow run MLProject --entry-point main --env-manager local
